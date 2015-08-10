@@ -122,8 +122,6 @@ BOARD_USES_CUTBACK_IN_RILD := true
 # Selinux
 BOARD_SEPOLICY_DIRS += device/moto/shamu/sepolicy
 
-BOARD_EGL_CFG := device/moto/shamu/egl.cfg
-
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WLAN_DEVICE           := bcmdhd
