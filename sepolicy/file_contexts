@@ -127,3 +127,9 @@
 /sys/devices/virtual/graphics/fb[0-1]/msm_.*          u:object_r:sysfs_hal_gralloc:s0
 /sys/devices/virtual/smdpkt/smdcntl([0-9])+/open_timeout u:object_r:sysfs_smdcntl_open_timeout:s0
 /sys/module/msm_thermal/core_control/cpus_offlined    u:object_r:sysfs_mpdecision:s0
+
+/system/vendor/bin/init\.qcom\.devstart\.sh            u:object_r:init-qcom-devstart-sh_exec:s0
+/system/vendor/bin/init\.qcom\.devwait\.sh             u:object_r:init-qcom-devwait-sh_exec:s0
+
+# Sysfs entry for audio
+/sys/kernel/boot_adsp/boot         u:object_r:sysfs_audio:s0
