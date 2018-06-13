@@ -14,7 +14,8 @@
 /data/ss-ram-dumps(/.*)?                              u:object_r:ram_dump_logs:s0
 /data/system/dropbox-add(/.*)?                        u:object_r:dropbox_data_file:s0
 /data/time(/.*)?                                      u:object_r:time_data_file:s0
- ###################################
+ 
+###################################
 # Dev nodes
 #
 /dev/bcm2079x-i2c                                     u:object_r:nfc_device:s0
@@ -41,7 +42,8 @@
 /dev/ttyHS3                                           u:object_r:adspd_device:s0
 /dev/ttyHSL0                                          u:object_r:console_device:s0
 /dev/v4l-subdev[0-9]*                                 u:object_r:video_device:s0
- ###################################
+
+###################################
 # Dev block nodes
 #
 /dev/block/mmcblk0p34                                 u:object_r:drm_block_device:s0
@@ -63,7 +65,8 @@
 /dev/block/platform/msm_sdcc\.1/by-name/system        u:object_r:system_block_device:s0
 /dev/block/platform/msm_sdcc\.1/by-name/userdata      u:object_r:userdata_block_device:s0
 /dev/block/zram0                                      u:object_r:swap_block_device:s0
- ###################################
+
+###################################
 # Dev socket nodes
 #
 /dev/socket/adspdsock                                 u:object_r:adspd_socket:s0
@@ -77,7 +80,8 @@
 /dev/socket/qmux_gps(/.*)?                            u:object_r:qmuxd_socket:s0
 /dev/socket/qmux_radio(/.*)?                          u:object_r:qmuxd_socket:s0
 /dev/socket/sensor_ctl_socket                         u:object_r:sensors_socket:s0
- ###################################
+
+###################################
 # persist files
 #
 /persist(/.*)?                                        u:object_r:persist_file:s0
@@ -87,7 +91,8 @@
 /persist/mdm(/.*)?                                    u:object_r:persist_modem_file:s0
 /persist/public/hiddenmenu(/.*)?                      u:object_r:persist_hiddenmenu_file:s0
 /persist/sensors(/.*)?                                u:object_r:persist_sensors_file:s0
- ###################################
+
+###################################
 # System files
 #
 /system/bin/adspd                                     u:object_r:adspd_exec:s0
@@ -119,7 +124,8 @@
 /system/vendor/bin/hw/android\.hardware\.thermal@1\.1-service\.shamu   u:object_r:hal_thermal_default_exec:s0
 /system/vendor/bin/hw/android\.hardware\.vibrator@1\.0-service\.shamu  u:object_r:hal_vibrator_default_exec:s0
 /system/vendor/bin/thermal-engine                     u:object_r:thermald_exec:s0
- ###################################
+
+###################################
 # sysfs files
 #
 /sys/devices/system/cpu                               u:object_r:sysfs_devices_system_cpu:s0
