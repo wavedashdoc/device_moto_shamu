@@ -59,6 +59,19 @@ int set_interactive_override(int on)
         return HINT_NONE;
     }
 
+/* interactive boost: min 4 CPUs, min 1.5 GHz when launch an app */
+static int resources_launch[] = {
+    CPUS_ONLINE_MIN_4,
+    CPU0_MIN_FREQ_NONTURBO_MAX + 5,
+    CPU1_MIN_FREQ_NONTURBO_MAX + 5,
+    CPU2_MIN_FREQ_NONTURBO_MAX + 5,
+    CPU3_MIN_FREQ_NONTURBO_MAX + 5
+};
+
+const int MIN_FLING_DURATION             = 1500; /* ms */
+const int MAX_INTERACTIVE_DURATION       = 5000; /* ms */
+const int LAUNCH_DURATION                = 2000; /* ms */
+
     if (!on) {
         /* Display off. */
         /*
