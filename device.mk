@@ -20,8 +20,8 @@
 #
 
 PRODUCT_COPY_FILES += \
-    device/moto/shamu/rootdir/etc/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
-    device/moto/shamu/rootdir/etc/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
 
 # Input device files
 PRODUCT_COPY_FILES += \
@@ -205,7 +205,7 @@ PRODUCT_PACKAGES += \
 
 # Touch firmware updater
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.mmi.touch.sh:system/bin/init.mmi.touch.sh
+    $(LOCAL_PATH)/rootdir/bin/init.mmi.touch.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.mmi.touch.sh
 
 # WiFi
 PRODUCT_PACKAGES += \
