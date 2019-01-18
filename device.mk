@@ -124,13 +124,8 @@ PRODUCT_COPY_FILES += \
 
 #Camera
 PRODUCT_PACKAGES += \
-    libqomx_core \
-    libmm-qcamera \
-    libmmcamera_interface \
-    libmmjpeg_interface \
     camera.msm8084 \
-    mm-jpeg-interface-test \
-    mm-qcamera-app
+    libmm-qcamera
 
 #Charging
 PRODUCT_PACKAGES += \
