@@ -21,7 +21,7 @@ $(call inherit-product, vendor/aosip/config/common_full_phone.mk)
 $(call inherit-product, device/moto/shamu/aosp_shamu.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-DEVICE_MAINTAINERS="camcory"
+DEVICE_MAINTAINERS="camcory + wavedashdoc"
 
 PRODUCT_NAME := aosip_shamu
 PRODUCT_DEVICE := shamu
