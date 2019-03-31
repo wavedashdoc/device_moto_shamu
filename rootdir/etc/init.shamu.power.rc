@@ -81,7 +81,7 @@ on property:dev.bootcomplete=1
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 30000
 
     # cpu-boost
-    write /sys/module/cpu_boost/parameters/input_boost_freq 1958400
-    write /sys/module/cpu_boost/parameters/input_boost_ms 60
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
 
     write /dev/cpuctl/cpu.notify_on_migrate 0
