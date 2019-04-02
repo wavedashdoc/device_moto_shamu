@@ -72,9 +72,3 @@ on property:dev.bootcomplete=1
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
     write /sys/devices/system/cpu/cpufreq/interactive/max_freq_hysteresis 80000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 5000
-
-    # cpu-boost
-    write /sys/module/cpu_boost/parameters/input_boost_freq 0
-    write /sys/module/cpu_boost/parameters/input_boost_ms 0
-
-    write /dev/cpuctl/cpu.notify_on_migrate 0
