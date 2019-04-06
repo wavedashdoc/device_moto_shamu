@@ -39,8 +39,10 @@ using android::hardware::joinRpcThreadpool;
 // Generated HIDL files
 #ifdef V1_0_HAL
 using android::hardware::power::V1_0::IPower;
+using android::hardware::power::V1_0::implementation::Power;
 #else
 using android::hardware::power::V1_1::IPower;
+using android::hardware::power::V1_1::implementation::Power;
 #endif
 
 int main() {
