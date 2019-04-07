@@ -53,6 +53,7 @@ using ::android::hardware::power::V1_1::PowerStateSubsystem;
 using ::android::hardware::hidl_vec;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
+using ::android::hardware::power::V1_0::Feature;
 
 Power::Power() {
     power_init();
@@ -227,6 +228,17 @@ Return<void> Power::powerHintAsync(PowerHint hint, int32_t data) {
     return powerHint(hint, data);
 }
 #endif
+
+status_t Power::registerAsSystemService() {
+    status_t ret = 0;
+
+    ret = IPower::registerAsService();
+    if (ret != 0) {
+        ALOGE("Failed to register IPower (%d)", ret);
+        goto fail;
+    } else {
+        ALOGI("Successfully registered IPower");
+    }
 
 }  // namespace implementation
 }  // namespace V1_0/1
