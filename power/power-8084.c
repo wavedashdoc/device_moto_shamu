@@ -70,34 +70,7 @@ static int resources_launch[] = {
 
 const int MIN_FLING_DURATION             = 1500; /* ms */
 const int MAX_INTERACTIVE_DURATION       = 5000; /* ms */
-const int MAX_LAUNCH_DURATION            = 5000; /* ms */
-
-static int process_activity_launch_hint(void *data)
-{
-    static int launch_handle = -1;
-    static int launch_mode = 0;
-
-    // release lock early if launch has finished
-    if (!data) {
-        if (CHECK_HANDLE(launch_handle)) {
-            release_request(launch_handle);
-            launch_handle = -1;
-        }
-        launch_mode = 0;
-        return HINT_HANDLED;
-    }
-
-    if (!launch_mode) {
-        launch_handle = interaction_with_handle(launch_handle, MAX_LAUNCH_DURATION,
-                ARRAY_SIZE(resources_launch), resources_launch);
-        if (!CHECK_HANDLE(launch_handle)) {
-            ALOGE("Failed to perform launch boost");
-            return HINT_NONE;
-        }
-        launch_mode = 1;
-    }
-    return HINT_HANDLED;
-}
+const int LAUNCH_DURATION                = 2000; /* ms */
 
     if (!on) {
         /* Display off. */
