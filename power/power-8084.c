@@ -49,16 +49,6 @@
 
 static int first_display_off_hint;
 
-int set_interactive_override(int on)
-{
-    char governor[80];
-
-    if (get_scaling_governor(governor, sizeof(governor)) == -1) {
-        ALOGE("Can't obtain scaling governor.");
-
-        return HINT_NONE;
-    }
-
 static int resources_interaction_fling_boost[] = {
 CPUS_ONLINE_MIN_3,
 0x20F,
@@ -134,6 +124,16 @@ int power_hint_override(power_hint_t hint, void *data)
     }
     return HINT_NONE;
 }
+
+int set_interactive_override(int on)
+{
+    char governor[80];
+
+    if (get_scaling_governor(governor, sizeof(governor)) == -1) {
+        ALOGE("Can't obtain scaling governor.");
+
+        return HINT_NONE;
+    }
 
     if (!on) {
         /* Display off. */
