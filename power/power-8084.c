@@ -72,6 +72,30 @@ const int MIN_FLING_DURATION             = 1500; /* ms */
 const int MAX_INTERACTIVE_DURATION       = 5000; /* ms */
 const int LAUNCH_DURATION                = 2000; /* ms */
 
+static int resources_interaction_fling_boost[] = {
+CPUS_ONLINE_MIN_3,
+0x20F,
+0x30F,
+0x40F,
+0x50F
+};
+
+static int resources_interaction_boost[] = {
+CPUS_ONLINE_MIN_2,
+0x20F,
+0x30F,
+0x40F,
+0x50F
+};
+
+static int resources_launch[] = {
+CPUS_ONLINE_MIN_3,
+CPU0_MIN_FREQ_TURBO_MAX,
+CPU1_MIN_FREQ_TURBO_MAX,
+CPU2_MIN_FREQ_TURBO_MAX,
+CPU3_MIN_FREQ_TURBO_MAX
+};
+
 int power_hint_override(power_hint_t hint, void *data)
 {
     static struct timespec s_previous_boost_timespec;
@@ -79,17 +103,6 @@ int power_hint_override(power_hint_t hint, void *data)
     long long elapsed_time;
     static int s_previous_duration = 0;
     int duration;
-
-    if (hint == POWER_HINT_SET_PROFILE) {
-        set_power_profile(*(int32_t *)data);
-        return HINT_HANDLED;
-    }
-
-    // Skip other hints in high/low power modes
-    if (current_power_profile == PROFILE_POWER_SAVE ||
-            current_power_profile == PROFILE_HIGH_PERFORMANCE) {
-        return HINT_HANDLED;
-    }
 
     switch (hint) {
         case POWER_HINT_INTERACTION:
