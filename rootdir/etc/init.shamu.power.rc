@@ -67,7 +67,7 @@ on property:dev.bootcomplete=1
     # cpufreq settings
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "0"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 99
-    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 300000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "0"
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 20000
