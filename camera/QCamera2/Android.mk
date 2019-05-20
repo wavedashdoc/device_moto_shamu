@@ -52,14 +52,14 @@ LOCAL_CFLAGS += \
     -DVANILLA_HAL
 
 LOCAL_C_INCLUDES := \
-        $(LOCAL_PATH)/stack/common \
-        frameworks/native/include/media/hardware \
-        frameworks/native/include/media/openmax \
-        hardware/qcom/media/msm8974/libstagefrighthw \
-        system/media/camera/include \
-        $(LOCAL_PATH)/../mm-image-codec/qexif \
-        $(LOCAL_PATH)/../mm-image-codec/qomx_core \
-        $(LOCAL_PATH)/util \
+    $(LOCAL_PATH)/stack/common \
+    frameworks/native/include/media/hardware \
+    frameworks/native/include/media/openmax \
+    $(call project-path-for,qcom-media)/libstagefrighthw \
+    system/media/camera/include \
+    $(LOCAL_PATH)/../mm-image-codec/qexif \
+    $(LOCAL_PATH)/../mm-image-codec/qomx_core \
+    $(LOCAL_PATH)/util
 
 #HAL 1.0 Include paths
 LOCAL_C_INCLUDES += \
