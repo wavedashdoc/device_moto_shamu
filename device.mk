@@ -120,13 +120,10 @@ PRODUCT_COPY_FILES += \
 
 #Camera
 PRODUCT_PACKAGES += \
-    libqomx_core \
     libmm-qcamera \
     libmmcamera_interface \
     libmmjpeg_interface \
     camera.msm8084 \
-    mm-jpeg-interface-test \
-    mm-qcamera-app
 
 #Charging
 PRODUCT_PACKAGES += \
@@ -178,6 +175,10 @@ PRODUCT_PACKAGES += \
     init.shamu.usb.rc \
     ueventd.shamu.rc
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
+
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl \
@@ -201,7 +202,7 @@ PRODUCT_PACKAGES += \
 
 # Touch firmware updater
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.mmi.touch.sh:system/bin/init.mmi.touch.sh
+    $(LOCAL_PATH)/rootdir/bin/init.mmi.touch.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.mmi.touch.sh
 
 # WiFi
 PRODUCT_PACKAGES += \

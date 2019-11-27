@@ -79,10 +79,6 @@ on late-fs
     # Mount RW partitions which need run fsck
     mount_all /fstab.shamu --late
 
-on post-fs
-    # Start devices by sysfs trigger
-    start devstart_sh
-
 on post-fs-data
     # boot time fs tune
     write /sys/block/mmcblk0/queue/iostats 0
@@ -217,6 +213,9 @@ on early-boot
     # esoc0 (mdm)
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys3/recovery_policy "skip_restart"
+
+    # Busy loop to wait for devices booted by devstart_sh just in case device not ready
+    exec - root root system -- /vendor/bin/init.qcom.devwait.sh
 
 on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -518,7 +517,7 @@ on property:persist.qca1530=no
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
-service mmi-touch-sh /system/bin/init.mmi.touch.sh atmel
+service mmi-touch-sh /system/vendor/bin/init.mmi.touch.sh atmel
     class main
     user root
     oneshot
@@ -558,6 +557,13 @@ service cnd /system/bin/cnd
     group system wifi inet radio wakelock net_admin
     socket cnd stream 660 root inet
     writepid /dev/cpuset/system-background/tasks
+
+ service devstart_sh /vendor/bin/init.qcom.devstart.sh
+    class main
+    user root
+    group root system
+    disabled
+    oneshot   
 
 on property:init.svc.media=restarting
     restart qcamerasvr
