@@ -49,7 +49,6 @@ type sysfs_msm_hsic_host_rdy,    fs_type, sysfs_type;
 type sysfs_rmnet,                fs_type, sysfs_type;
 type sysfs_rqstats,              fs_type, sysfs_type;
 type sysfs_sar_wifi,             fs_type, sysfs_type;
->>>>>>> 0d8db634... shamu: sepolicy: Alphabetize file.te
 type sysfs_smdcntl_open_timeout, fs_type, sysfs_type;
 type sysfs_socinfo,              fs_type, sysfs_type, mlstrustedobject;
 type sysfs_xhci_msm_hsic,        fs_type, sysfs_type;
