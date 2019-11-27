@@ -123,7 +123,7 @@ PRODUCT_PACKAGES += \
     libmm-qcamera \
     libmmcamera_interface \
     libmmjpeg_interface \
-    camera.msm8084 \
+    camera.msm8084 
 
 #Charging
 PRODUCT_PACKAGES += \
