@@ -51,7 +51,7 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/stack/common \
     frameworks/native/include/media/hardware \
     frameworks/native/include/media/openmax \
-    hardware/qcom/media/msm8974/libstagefrighthw \
+    $(call project-path-for,qcom-media)/libstagefrighthw \
     system/media/camera/include \
     $(LOCAL_PATH)/../mm-image-codec/qexif \
     $(LOCAL_PATH)/../mm-image-codec/qomx_core \
@@ -62,12 +62,13 @@ LOCAL_C_INCLUDES += \
     frameworks/native/include/media/hardware \
     device/moto/shamu/camera/QCamera2/HAL
 
-LOCAL_HEADER_LIBRARIES := generated_kernel_headers
+LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 #LOCAL_STATIC_LIBRARIES := libqcamera2_util
 LOCAL_C_INCLUDES += \
-        hardware/qcom/display/$(TARGET_BOARD_PLATFORM)/libgralloc \
-        hardware/qcom/display/$(TARGET_BOARD_PLATFORM)/libqdutils
+    $(call project-path-for,qcom-display)/libgralloc \
+    $(call project-path-for,qcom-display)/libqdutils
 
 LOCAL_SHARED_LIBRARIES := \
     libcamera_client \
