@@ -47,6 +47,7 @@ genfscon sysfs /devices/sound.44/sound/card0/input3/capabilities                
 genfscon sysfs /devices/sound.44/sound/card0/input4/capabilities                    u:object_r:sysfs_input:s0
 genfscon sysfs /devices/virtual/input/input1/capabilities                           u:object_r:sysfs_input:s0
 genfscon sysfs /devices/virtual/android_usb/android0/f_rmnet_smd_sdio/transport     u:object_r:sysfs_rmnet:s0
+genfscon sysfs /devices/virtual/graphics                                            u:object_r:sysfs_graphics:s0
 genfscon sysfs /devices/virtual/net/wlan0/address                                   u:object_r:sysfs_mac_address:s0
 genfscon sysfs /devices/virtual/thermal                                             u:object_r:sysfs_thermal:s0
 genfscon sysfs /module/bcmdhd/parameters/firmware_path                              u:object_r:sysfs_wlan_fwpath:s0
