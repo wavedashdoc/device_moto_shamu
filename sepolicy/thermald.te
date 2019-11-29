@@ -36,8 +36,6 @@ allow thermald {
     sysfs_usb
 }:file w_file_perms;
 
-r_dir_file(thermald, sysfs_batteryinfo)
-
 allow thermald {
     sysfs_batteryinfo
     sysfs_kgsl_gpuclk
