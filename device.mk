@@ -19,10 +19,6 @@
 # are also specific to shamu devices
 #
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/bin/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
-    $(LOCAL_PATH)/rootdir/bin/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
-
 # Input device files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
@@ -36,7 +32,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     $(LOCAL_PATH)/audio/audio_policy_volumes_drc.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes_drc.xml \
     $(LOCAL_PATH)/audio/mixer_paths.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths.xml \
-    $(LOCAL_PATH)/audio/motvr_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/motvr_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml \
@@ -79,6 +74,11 @@ PRODUCT_CHARACTERISTICS := nosdcard
 
 DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
+
+
+# OEM Package for RIL
+PRODUCT_PACKAGES += \
+    qmi_motext_hook
 
 PRODUCT_PACKAGES += \
     gralloc.msm8084 \
@@ -143,14 +143,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8084
 
-# Media
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
-    $(LOCAL_PATH)/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
-    $(LOCAL_PATH)/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
-    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
+PRODUCT_PACKAGES += \
+    librmnetctl \
+    libion \
+    libxml2
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -165,6 +161,15 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/libnfc-brcm.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm.conf \
     $(LOCAL_PATH)/configs/libnfc-brcm-20795a10.conf:$(TARGET_COPY_OUT_VENDOR)/etc/libnfc-brcm-20795a10.conf
 
+# Media
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/media/media_profiles_V1_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_V1_0.xml \
+    $(LOCAL_PATH)/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
+    $(LOCAL_PATH)/media/media_codecs_performance.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
+    frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml
+
 # Power
 PRODUCT_PACKAGES += \
     power.shamu
@@ -177,14 +182,9 @@ PRODUCT_PACKAGES += \
     init.shamu.usb.rc \
     ueventd.shamu.rc
 
-# RIL
-PRODUCT_PACKAGES += \
-    librmnetctl \
-    libxml2 \
-    qmi_motext_hook
-
-PRODUCT_PACKAGES += \
-    libion
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devwait.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devwait.sh \
+    $(LOCAL_PATH)/rootdir/bin/init.qcom.devstart.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qcom.devstart.sh
 
 # Sec config
 PRODUCT_COPY_FILES += \
@@ -225,6 +225,14 @@ $(call add-product-dex-preopt-module-config,MotoSignatureApp,disable)
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
+   dalvik.vm.heapgrowthlimit=256m
+
+# setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+$(call inherit-product-if-exists, hardware/qcom/msm8x84/msm8x84.mk)
+$(call inherit-product-if-exists, vendor/qcom/gpu/msm8x84/msm8x84-gpu-vendor.mk)
+
+PRODUCT_PROPERTY_OVERRIDES += \
    ro.hwui.texture_cache_size=72 \
    ro.hwui.layer_cache_size=48 \
    ro.hwui.r_buffer_cache_size=8 \
@@ -237,17 +245,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
    ro.hwui.text_large_cache_width=2048 \
    ro.hwui.text_large_cache_height=2048
 
-
-PRODUCT_PROPERTY_OVERRIDES += \
-   dalvik.vm.heapgrowthlimit=256m \
-   dalvik.vm.heapminfree=2m
-
-# setup dalvik vm configs.
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, hardware/qcom/msm8x84/msm8x84.mk)
-$(call inherit-product-if-exists, vendor/qcom/gpu/msm8x84/msm8x84-gpu-vendor.mk)
-
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
    fs_config_files
@@ -257,7 +254,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/qcril.db:system/etc/ril/qcril.db
 
 # Treble packages
-$(call inherit-product, $(LOCAL_PATH)/treble.mk)
+$(call inherit-product, device/moto/shamu/treble.mk)
 
 # Properties going into default.prop
 
