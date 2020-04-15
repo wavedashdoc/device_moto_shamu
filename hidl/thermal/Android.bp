@@ -33,6 +33,8 @@ cc_binary {
     "libcutils",
     "libhardware",
     "libhidlbase",
+    "libhidltransport",
+    "libhwbinder",
     "libutils",
     "android.hardware.thermal@1.0",
     "android.hardware.thermal@1.1",
